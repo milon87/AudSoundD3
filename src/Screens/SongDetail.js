@@ -117,21 +117,21 @@ export default class SongDetail extends Component {
 
     download = () => {
         let date = new Date();
-        let url = "https://www.clker.com/cliparts/B/B/1/E/y/r/marker-pin-google-md.png";
+        let url = "https://dev.jetarizona.org/Audio/LearningSessionVishnuSahasranamam/008-SVSNStotram-Eeshanaha.mp3";
         let ext = SongDetail.extention(url);
         ext = "." + ext[0];
         const {config, fs} = RNFetchBlob;
-        let PictureDir = fs.dirs.PictureDir;
+        let DownloadDir = fs.dirs.DownloadDir;
         let options = {
             addAndroidDownloads: {
                 useDownloadManager: true,
                 notification: true,
-                path: PictureDir + "/image_" + Math.floor(date.getTime() + date.getSeconds() / 2) + ext,
-                description: 'Image'
+                path: DownloadDir + "/audio" + Math.floor(date.getTime() + date.getSeconds() / 2) + ext,
+                description: 'Audio'
             }
         };
         config(options).fetch('GET', url).then((res) => {
-            Alert.alert('' + res.path);
+            //Alert.alert('');
         });
     };
 
@@ -156,7 +156,7 @@ export default class SongDetail extends Component {
         })
     };
 
-    downloadFile = () => {
+   /* downloadFile = () => {
         console.log('Hello')
         RNFetchBlob.config({
             // add this option that makes response data to be stored as a file,
@@ -168,7 +168,7 @@ export default class SongDetail extends Component {
                 alert('File is saved');
                 console.log('The file saved to ', res.path())
             })
-    }
+    }*/
 }
 
 const
