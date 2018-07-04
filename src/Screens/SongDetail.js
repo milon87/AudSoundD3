@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, Button} from 'react-native';
+import {View, Text, Alert, StyleSheet, TouchableOpacity, Image, Button} from 'react-native';
 import Slider from "react-native-slider";
 import {Header, Icon} from "react-native-elements";
 import Sound from 'react-native-sound';
@@ -12,6 +12,7 @@ export default class SongDetail extends Component {
     static navigationOptions = {
         title: 'Detail',
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -68,21 +69,9 @@ export default class SongDetail extends Component {
         let playButton = this.state.status ? require('../assets/stop.png') : require('../assets/play.png');
 
         return (<View style={styles.container}>
-          {/*  <Header
-                placement='left'
-                leftComponent={<Icon
-                    onPress={() => {
-                        this.props.navigation.pop()
-                    }}
-                    color='black'
-                    name='arrow-back'/>}
-                backgroundColor='#fbf1dc'
-                centerComponent={{text: 'More', style: {color: 'black'}}}
-            />*/}
-
             <View style={{alignItems: 'center', flexDirection: 'row'}}>
                 <TouchableOpacity onPress={this.stateChange}>
-                    <Image style={{width: 40, height: 40}}
+                    <Image style={{margin: 10, width: 40, height: 40}}
                            source={playButton}/>
                 </TouchableOpacity>
 
@@ -100,8 +89,10 @@ export default class SongDetail extends Component {
                             })
                         }}/>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <Text>{parseInt(this.state.currentTime)}</Text>
-                        <Text>{parseInt(this.state.duration)}</Text>
+                        <Text>{parseInt(this.state.currentTime / 60) < 10 ? '0' + parseInt(this.state.currentTime / 60) : parseInt(this.state.currentTime / 60)}:
+                            {parseInt(this.state.currentTime % 60) < 10 ? '0' + parseInt(this.state.currentTime % 60) : parseInt(this.state.currentTime % 60)}</Text>
+                        <Text>{parseInt(this.state.duration / 60) < 10 ? '0' + parseInt(this.state.duration / 60) : parseInt(this.state.duration / 60)}:
+                            {parseInt(this.state.duration % 60) < 10 ? '0' + parseInt(this.state.duration % 60) : parseInt(this.state.duration % 60)}</Text>
 
                     </View>
                 </View>
@@ -117,11 +108,35 @@ export default class SongDetail extends Component {
                     name='file-download'
                     type='material'
                     color='black'
-                    onPress={this.downloadFile}/>
+                    onPress={this.download}/>
 
             </View>
 
         </View>)
+    }
+
+    download = () => {
+        let date = new Date();
+        let url = "https://www.clker.com/cliparts/B/B/1/E/y/r/marker-pin-google-md.png";
+        let ext = SongDetail.extention(url);
+        ext = "." + ext[0];
+        const {config, fs} = RNFetchBlob;
+        let PictureDir = fs.dirs.PictureDir;
+        let options = {
+            addAndroidDownloads: {
+                useDownloadManager: true,
+                notification: true,
+                path: PictureDir + "/image_" + Math.floor(date.getTime() + date.getSeconds() / 2) + ext,
+                description: 'Image'
+            }
+        };
+        config(options).fetch('GET', url).then((res) => {
+            Alert.alert('' + res.path);
+        });
+    };
+
+    static extention(filename) {
+        return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename) : undefined;
     }
 
     stateChange = () => {
@@ -129,7 +144,7 @@ export default class SongDetail extends Component {
     };
 
 
-    stopAudio() {
+    stopAudio = () => {
         sound.stop();
         sound.release();
         sound = null;
@@ -139,11 +154,14 @@ export default class SongDetail extends Component {
             status: false,
             currentTime: 0,
         })
-    }
+    };
 
     downloadFile = () => {
         console.log('Hello')
-        RNFetchBlob
+        RNFetchBlob.config({
+            // add this option that makes response data to be stored as a file,
+            // this is much more performant.
+        })
             .fetch('GET', 'https://dev.jetarizona.org/Audio/LearningSessionVishnuSahasranamam/008-SVSNStotram-Eeshanaha.mp3')
             .then((res) => {
                 // the temp file path

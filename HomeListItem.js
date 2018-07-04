@@ -9,7 +9,7 @@ export const Item = ({label, imageURl}) => {
          <Image
             style={{borderRadius: 25, width: 60, height: 60}}
             source={imageURl}/>
-        <Text style={{fontSize: 8, color: 'black', paddingTop: 10}}>{label}</Text>
+        <Text style={{fontSize: 12, color: 'black', paddingTop: 10}}>{label}</Text>
 
     </View>)
 };

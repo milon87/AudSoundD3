@@ -4,9 +4,7 @@ import {Header} from "react-native-elements";
 
 
 export default class SongDetail extends Component {
-    static navigationOptions = {
-        title: 'More',
-    };
+
 
     constructor(props) {
         super(props);
