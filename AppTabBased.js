@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import Home from './src/Screens/FirstScreen';
 import {createBottomTabNavigator} from 'react-navigation'
-import SongDetail from "./src/Screens/SongDetail";
 import SampleScreen from "./src/Screens/SampleScreen";
 import TabStack from "./src/Screens/TabStack";
+
 
 const Nav = createBottomTabNavigator({
     Home: SampleScreen,
@@ -22,6 +22,10 @@ const Nav = createBottomTabNavigator({
     initialRouteName: 'More',
     navigationOptions: ({navigation}) => ({
         tabBarOptions: {
+            style:{
+                justifyContent:'center',
+              height:60,
+            },
             tabStyle: {
                 backgroundColor: '#fbf1dc'
             }

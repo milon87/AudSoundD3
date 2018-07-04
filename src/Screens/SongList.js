@@ -48,6 +48,9 @@ const list = [
 
 export default class SongList extends Component {
 
+    static navigationOptions = {
+        title: 'List',
+    };
     constructor(props) {
         super(props);
 
@@ -62,7 +65,7 @@ export default class SongList extends Component {
 
         return (
             <View style={{flex: 1}}>
-                <Header
+               {/* <Header
                     placement='left'
                     leftComponent={<Icon
                         onPress={() => {
@@ -72,7 +75,7 @@ export default class SongList extends Component {
                         name='arrow-back'/>}
                     backgroundColor='#fbf1dc'
                     centerComponent={{text: 'More', style: {color: 'black'}}}
-                />
+                />*/}
 
                 <SearchBar
                     round

@@ -4,17 +4,21 @@ import {Header} from "react-native-elements";
 
 
 export default class SongDetail extends Component {
+    static navigationOptions = {
+        title: 'More',
+    };
+
     constructor(props) {
         super(props);
     }
 
     render() {
         return (<View style={styles.container}>
-            <Header
+            {/* <Header
                 placement='left'
                 leftComponent={{icon: 'arrow-back', color: 'black'}}
                 backgroundColor='#fbf1dc'
-                centerComponent={{text: 'More', style: {color: 'black'}}}/>
+                centerComponent={{text: 'More', style: {color: 'black'}}}/>*/}
 
         </View>)
     }

@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import GridView from 'react-native-super-grid';
 import {Item} from "../../HomeListItem";
-import {Header} from "react-native-elements";
+import {Header, Icon} from "react-native-elements";
 
 
 export default class FirstScreen extends Component {
+    static navigationOptions = {
+        title: 'More',
+    };
     constructor(props) {
         super(props)
     }
@@ -59,9 +62,10 @@ export default class FirstScreen extends Component {
 
         return (
             <View>
-                <Header
+               {/* <Header
                     backgroundColor='#fbf1dc'
                     centerComponent={{text: 'More', style: {color: 'black'}}}/>
+*/}
 
                 <GridView
                     itemDimension={70}

@@ -18,7 +18,7 @@ const Navigation = createStackNavigator({
     initialRouteName: 'FirstScreen',
     /* The header config from FirstScreen is now here */
     navigationOptions: {
-        header: null,
+
         headerStyle: {
             backgroundColor: '#fbf1dc',
         },
